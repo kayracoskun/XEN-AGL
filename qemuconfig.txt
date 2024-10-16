@@ -1,0 +1,29 @@
+/home/sw/Xen-AGL/build-virtio-aarch64/tmp/work/x86_64-linux/qemu-helper-native/1.0-r1/recipe-sysroot-native/usr/bin/qemu-system-aarch64
+-device virtio-net-device,netdev=net0,mac=52:54:00:12:34:02 
+-netdev tap,id=net0,ifname=tap0,script=no,downscript=no 
+-object rng-random,filename=/dev/urandom,id=rng1 
+-device virtio-rng-pci,rng=rng1 
+-drive id=disk0,file=/home/sw/Xen-AGL/build-virtio-aarch64/tmp/deploy/images/virtio-aarch64/agl-cluster-demo-platform-virtio-aarch64-20240415090755.rootfs.ext4,if=none,format=raw 
+-device virtio-blk-device,drive=disk0 
+-global virtio-mmio.force-legacy=false 
+-device virtio-gpu-device 
+-display gtk,gl=on 
+-device virtio-mouse-device 
+-device virtio-keyboard-device 
+-object rng-random,filename=/dev/urandom,id=rng0 
+-device virtio-rng-device,rng=rng0     
+-device loader,file=/home/sw/Xen-AGL/build-virtio-aarch64/tmp/deploy/images/virtio-aarch64/Image,addr=0x45000000  
+-machine virt,gic-version=3 
+-machine virtualization=true 
+-cpu cortex-a72 
+-cpu cortex-a53 
+-cpu cortex-a57 
+-smp 9 
+-m 8192 
+-serial mon:vc 
+-serial null 
+-display gtk,show-cursor=on  
+-kernel /home/sw/Xen-AGL/build-virtio-aarch64/tmp/deploy/images/virtio-aarch64/xen-virtio-aarch64 
+-append 'root=/dev/vda rw  mem=8192M ip=192.168.7.2::192.168.7.1:255.255.255.0::eth0:off:8.8.8.8 console=ttyAMA0 ' 
+-dtb /home/sw/Xen-AGL/build-virtio-aarch64/tmp/deploy/images/virtio-aarch64/agl-cluster-demo-platform-virtio-aarch64-20240415090755.qemuboot.dtb
+
